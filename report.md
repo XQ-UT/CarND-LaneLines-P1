@@ -1,8 +1,6 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
+## Xianlei Qiu
 
 ---
 
@@ -15,7 +13,11 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[fitted_line_after_filter_outlier]: ./report_img/fitted_line_after_filter_outlier.jpg
+[fitted_line_before_filter_outlier]: ./report_img/fitted_line_before_filter_outlier.jpg
+[img_before_filter_horizatal_line]: ./report_img/img_before_filter_horizatal_line.jpg
+[img_before_filter_outlier]: ./report_img/img_before_filter_outlier.jpg
+
 
 ---
 
@@ -23,25 +25,48 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+The pipeline of the lanes detector can be described as below:
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+* Read image.
+* Apply grayscale to the image.
+* Apply Gaussian bulr to filter out high frequency noise.
+* Apply Canny algorithm to get all the edges.
+* Draw an interested region mask and apply the mask to the detected edges.
+* Use Hough Lines function to get all the possible lines.
+* Average lines using `draw_lines` function.
+* Draw averaged left line and right line on the original image. 
 
-![alt text][image1]
+The main logic in the `draw_lines` function is dividing all the lines to left and right line 
+according to their *slope* or `tan` value. If `tan(line)` is larger than 0, the line will be 
+classified as right line. Otherwise, we treat it as left line. Once we get all the points in
+left line and right line, `np.polyfit` will be used to fit a one-dgree line. 
+
+Several optimizations were made to improve the accuracy and stability of the `draw_lines` function.
+Firstly, we can saw some outliers while we tried to fit the potins.
+![fitted_line_before_filter_outlier][fitted_line_before_filter_outlier]
+
+The outliers will result in fitting a line which will severely diverge from the true line.
+![img_before_filter_outlier][img_before_filter_outlier]
+
+So, before fitting, we will need to filter out outliers. This graph shows the line fitted to points without outliers.
+![fitted_line_after_filter_outlier][fitted_line_after_filter_outlier]
+
+
+Besides, horizontal line will also affect our detector. 
+![img_before_filter_horizatal_line][img_before_filter_horizatal_line]
+Therefore, I also filtered out the line whose slope is close the horizontal line. 
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+My current lines detector has several flaws: 
+* It has a strong assumption that there will be only *two* lines, left and right.
+* It has a large constraint that it only detect lines in interested region. And there should not be any other cars in the intereted region. 
+* Senstive to the other random edges in the interested region. If there are some othere edges, like those in optional challenge video, the detector cannot work properly.
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+I feel like the current lines detector has too many constraints and assumptions which make it impractical.
+One possible improvements is to continue tune the parameters in *Canny* and *Hough* functions. Another improvement may be to adopt more intelligent algorithms, like deep learning.
 
-Another potential improvement could be to ...
