@@ -36,26 +36,32 @@ Several optimizations were made to improve the accuracy and stability of the `dr
 Firstly, we can saw some outliers while we tried to fit the potins.
 <p align="center">
   <img src="report_img/fitted_line_before_filter_outlier.jpg" width="500" height="300"/>
+  <br>
+  <em>Figure 1: How outliers affect line fitting</em>
 </p>
-
 
 The outliers will result in fitting a line which will severely diverge from the true line.
 <p align="center">
   <img src="report_img/img_before_filter_outlier.jpg" width="900" height="300" />
+  <br>
+  <em>Figure 2: How outliers affect line detection</em>
 </p>
 
 
 So, before fitting, we will need to filter out outliers. This graph shows the line fitted to points without outliers.
 <p align="center">
   <img src="report_img/fitted_line_after_filter_outlier.jpg" width="500" height="300" />
+  <br>
+  <em>Figure 3: Line fitting after filtering out outliers</em>
 </p>
   
-Besides, horizontal line will also affect our detector. 
+Besides, horizontal line will also affect our detector. Therefore, we also need filter out lines whose slope are close the horizontal line. 
 <p align="center">
   <img src="report_img/img_before_filter_horizatal_line.jpg" width="500" height="300" />
+  <br>
+  <em>Figure 4: How horizontal lines affect line detection</em>
 </p>
 
-Therefore, I also filtered out lines whose slope are close the horizontal line. 
 
 
 ### 2. Identify potential shortcomings with your current pipeline
