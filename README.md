@@ -48,7 +48,7 @@ The outliers will result in fitting a line which will severely diverge from the 
 </p>
 
 
-So, before fitting, we will need to filter out outliers. This graph shows the line fitted to points without outliers.
+So, before fitting, we will need to filter out outliers. The graph below shows the line fitted to points without outliers.
 <p align="center">
   <img src="report_img/fitted_line_after_filter_outlier.jpg" width="500" height="300" />
   <br>
