@@ -34,20 +34,26 @@ left line and right line, `np.polyfit` will be used to fit a one-dgree line.
 
 Several optimizations were made to improve the accuracy and stability of the `draw_lines` function.
 Firstly, we can saw some outliers while we tried to fit the potins.
+<p align="center">
+  <img src="report_img/fitted_line_before_filter_outlier.jpg" width="500" height="300"/>
+</p>
 
-<img src="report_img/fitted_line_before_filter_outlier.jpg" width="200" height="200" />
 
 The outliers will result in fitting a line which will severely diverge from the true line.
+<p align="center">
+  <img src="report_img/img_before_filter_outlier.jpg" width="900" height="300" />
+</p>
 
-<img src="report_img/img_before_filter_outlier.jpg" width="200" height="200" />
 
 So, before fitting, we will need to filter out outliers. This graph shows the line fitted to points without outliers.
-
-<img src="report_img/fitted_line_after_filter_outlier.jpg" width="200" height="200" />
-
+<p align="center">
+  <img src="report_img/fitted_line_after_filter_outlier.jpg" width="500" height="300" />
+</p>
+  
 Besides, horizontal line will also affect our detector. 
-
-<img src="report_img/img_before_filter_horizatal_line.jpg" width="200" height="200" />
+<p align="center">
+  <img src="report_img/img_before_filter_horizatal_line.jpg" width="500" height="300" />
+</p>
 
 Therefore, I also filtered out lines whose slope are close the horizontal line. 
 
