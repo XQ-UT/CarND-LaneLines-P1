@@ -9,15 +9,6 @@ The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
 * Reflect on your work in a written report
 
-
-[//]: # (Image References)
-
-[fitted_line_after_filter_outlier]: ./report_img/fitted_line_after_filter_outlier.jpg
-[fitted_line_before_filter_outlier]: ./report_img/fitted_line_before_filter_outlier.jpg
-[img_before_filter_horizatal_line]: ./report_img/img_before_filter_horizatal_line.jpg
-[img_before_filter_outlier]: ./report_img/img_before_filter_outlier.jpg
-
-
 ---
 
 ### Reflection
@@ -43,17 +34,21 @@ left line and right line, `np.polyfit` will be used to fit a one-dgree line.
 
 Several optimizations were made to improve the accuracy and stability of the `draw_lines` function.
 Firstly, we can saw some outliers while we tried to fit the potins.
-![fitted_line_before_filter_outlier][fitted_line_before_filter_outlier]
+
+<img src="report_img/fitted_line_before_filter_outlier.jpg" width="200" height="200" />
 
 The outliers will result in fitting a line which will severely diverge from the true line.
-![img_before_filter_outlier][img_before_filter_outlier]
+
+<img src="report_img/img_before_filter_outlier.jpg" width="200" height="200" />
 
 So, before fitting, we will need to filter out outliers. This graph shows the line fitted to points without outliers.
-![fitted_line_after_filter_outlier][fitted_line_after_filter_outlier]
 
+<img src="report_img/fitted_line_after_filter_outlier.jpg" width="200" height="200" />
 
 Besides, horizontal line will also affect our detector. 
-![img_before_filter_horizatal_line][img_before_filter_horizatal_line]
+
+<img src="report_img/img_before_filter_horizatal_line.jpg" width="200" height="200" />
+
 Therefore, I also filtered out lines whose slope are close the horizontal line. 
 
 
