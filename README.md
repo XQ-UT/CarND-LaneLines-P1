@@ -62,6 +62,7 @@ Besides, horizontal line will also affect our detector. Therefore, we also need 
   <em>Figure 4: How horizontal lines affect line detection</em>
 </p>
 
+Finally, we can get our line detector working!
 <p align="center">
   <img src="report_img/img_final_detection.jpg" width="900" height="300" />
   <br>
