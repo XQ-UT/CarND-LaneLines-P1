@@ -61,6 +61,7 @@ Therefore, I also filtered out lines whose slope are close the horizontal line.
 
 My current lines detector has several flaws: 
 
+* It can only detect straight lines.
 * It has a strong assumption that there will be only **two** lines, left and right.
 * It has a large constraint that it only detect lines in interested region. And there should not be any other cars in the intereted region.
 * Senstive to the other random edges in the interested region. If there are some othere edges, like those in optional challenge video, the detector cannot work properly.
